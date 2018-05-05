@@ -1,0 +1,72 @@
+public class tu {
+	public static int m =0 , n = 0 ;
+	public static void main(String[] args) {
+		Scanner sca  = new Scanner(System.in);
+		
+		
+		m = sca.nextInt();
+		n = sca.nextInt();
+		sca.nextLine();
+		char[][] pic = new char[m][n];
+		int it = 0;
+		for( int  i =0 ; i < m ;i ++){
+			String str = sca.nextLine();
+			//System.out.println(str);
+			pic[i] = str.toCharArray();
+		}
+			
+			
+			
+		
+		int[][] index = new int[m][n];
+		for(int  i = 0 ; i < m ; i ++){
+			for( int j = 0 ; j < n ; j ++){
+				index[i][j] = 0;
+			}
+		}
+		int count = 0;
+		for( int i = 0 ; i < m ; i++){
+			for( int j = 0 ; j < n ; j++){
+				if( index[i][j] == 0 && pic[i][j] == '@'){
+					dfs(pic ,index ,i , j ,  ++count );
+				}
+			}
+				
+		}
+		System.out.println(count);
+		
+	}
+	
+	public static void dfs(char[][] pic ,int[][] index , int i , int j, int id){
+		if( i <0 || i >= m || j < 0 || j >= n){
+			return ;
+		}
+		if( pic[i][j] != '@' || index[i][j] != 0){
+			return ;
+		}
+		
+		
+		index[i][j] = id;
+		for( int t = -1 ; t <=1 ; t ++){
+			for( int k = -1 ; k <=1 ; k++){
+				if(( t == 0 && k == 0) || (t == k)){//是否判断t==k要看斜线相连算不算一个连通
+					;
+					
+				}else{
+					dfs( pic , index ,i + t , j + k , id);
+				}
+				
+			}
+		}
+		return ;
+	}
+	
+	
+	
+	
+	
+
+	
+	
+
+}
